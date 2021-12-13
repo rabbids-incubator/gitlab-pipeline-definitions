@@ -23,7 +23,7 @@ test:
     - dotnet test 
     - dotnet test --no-build --configuration $DOTNET_CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
   dependencies:
-    - build_job
+    - build
   artifacts:
     when: always
     paths:
