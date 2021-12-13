@@ -9,17 +9,25 @@ stages:
   - build
   - test
 
-build_job:
+build:
   stage: build
   script:
     - cd $ROOT_FOLDER
     - dotnet restore
     - dotnet build --no-restore --configuration $DOTNET_CONFIGURATION
 
-test_job:
+test:
   stage: test
   script:
     - cd $ROOT_FOLDER
-    - dotnet test --no-build --configuration $DOTNET_CONFIGURATION
+    - dotnet test 
+    - dotnet test --no-build --configuration $DOTNET_CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
   dependencies:
     - build_job
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit:
+        - ./**/*test-result.xml
