@@ -1,9 +1,9 @@
+default:
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+
 variables:
   ROOT_FOLDER: .
   DOTNET_CONFIGURATION: Debug
-
-default:
-  image: mcr.microsoft.com/dotnet/sdk:6.0
 
 stages:
   - build
